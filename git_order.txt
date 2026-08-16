@@ -1,0 +1,151 @@
+# 查看全部配置（全局+当前仓库）
+git config --list
+
+# 查看全局用户名
+git config --global --get user.name
+# 查看全局邮箱
+git config --global --get user.email
+
+# 设置全局用户名邮箱
+git config --global user.name "你的名字"
+git config --global user.email "你的邮箱@xx.com"
+
+# 设置【当前仓库】用户名邮箱（不加--global，优先级更高）
+git config user.name "仓库专用名字"
+git config user.email "仓库专用邮箱@xx.com"
+
+# 删除全局配置
+git config --global --unset user.name
+git config --global --unset user.email
+
+# 在当前文件夹初始化为git仓库
+git init
+
+# 克隆远程仓库（HTTPS方式）
+git clone https://gitee.com/用户名/仓库名.git
+
+# 克隆远程仓库（SSH方式，需要配置ssh密钥）
+git clone git@gitee.com:用户名/仓库名.git
+
+# 克隆到指定文件夹
+git clone https://gitee.com/xxx/test.git myfolder
+
+# 查看文件状态（哪些修改、新增、删除）
+git status
+
+# 添加单个文件到暂存区
+git add main.py
+
+# 添加多个文件
+git add a.py b.txt
+
+# 添加当前目录所有改动文件到暂存区
+git add .
+
+# 提交暂存区代码到本地仓库，必须写提交说明
+git commit -m "feat: 新增登录功能"
+
+# 查看提交日志，命令很长，可以通过取别名来简化
+git log
+
+# 取别名命令
+vim ~/.bashrc
+
+#这个添加再最末尾就行
+alias git-log="git log --graph --oneline --all --decorate --color"
+
+# 查看某次提交改动详情，复制commit id
+git show 提交ID
+
+# 查看本地所有分支
+git branch
+
+# 查看本地+远程所有分支
+git branch -a
+
+# 创建新分支
+git branch dev
+
+# 切换到指定分支
+git checkout dev
+
+# 创建并直接切换到新分支（常用）
+git checkout -b dev
+
+# 删除本地分支（必须先切到别的分支）
+git branch -d dev
+
+# 合并dev分支到当前分支,需要保证历史提交记录一致，否则会失败（比如当前在main）
+git merge dev
+
+# 查看远程仓库地址
+git remote -v
+
+# 添加远程仓库origin（一般clone自动生成）
+git remote add origin https://gitee.com/xxx/test.git
+
+# 修改远程仓库地址 HTTPS → SSH 或者反过来
+git remote set-url origin git@gitee.com:xxx/test.git
+
+# 删除远程仓库
+git remote remove origin
+
+# 拉取远程最新代码，不自动合并
+git fetch origin
+
+# 拉取并且合并远程main分支到本地当前分支
+git pull origin main
+
+# 将本地main分支推送到远程origin
+git push origin main
+
+# 第一次推送，建立本地分支与远程分支关联
+git push -u origin main
+
+# 把文件从暂存区撤回工作区，不删除修改
+git reset HEAD 文件名
+
+# 放弃工作区文件修改，恢复到版本库状态（改动直接丢失！）
+git checkout -- 文件名
+
+# 软回滚到某个commit，改动保留在工作区
+git reset --soft 提交ID
+
+# 硬回滚，丢弃所有改动，回到指定版本（本地修改全部丢失！谨慎）
+git reset --hard 提交ID
+
+# 丢弃所有本地未提交修改，恢复到仓库状态
+git reset --hard HEAD
+
+# 储藏当前所有未提交改动
+git stash
+
+# 查看储藏列表
+git stash list
+
+# 恢复最新储藏，并且删除储藏记录
+git stash pop
+
+# 恢复储藏，但不删除储藏记录
+git stash apply
+
+# 删除储藏
+git stash drop
+
+# 创建标签
+git tag v1.0.0
+
+# 查看标签
+git tag
+
+# 推送标签到远程
+git push origin v1.0.0
+
+# 推送全部标签
+git push origin --tags
+
+# 是否校验ssl证书 true开启 false关闭（不推荐长期关闭）
+git config --global http.sslVerify false
+
+# Windows git ssl后端
+git config --global http.sslbackend schannel
